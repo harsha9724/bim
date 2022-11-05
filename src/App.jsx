@@ -18,43 +18,43 @@ const handleChange=(e)=>{
   const {name,value}=e.target;
   setdetails({...details,[name]:value});
 }
+useEffect(() => {
+  if(Object.keys(formerror).length===0 && submit){
+    let BIM=eval(details.weight/(details.height/100)**2);
+    setBmi(parseInt(BIM));  
+    if(bim<16){
+     setCategory("severe thinness")
+    }
+    if(bim>=16 && bim<=17){
+     setCategory("Moderate Thinness")
+    }
+    if(bim>17 && bim<=18.5){
+     setCategory("Mild Thinness")
+    }
+    if(bim>18.5 && bim<=25){
+     setCategory("Normal")
+    }
+    if(bim>25 && bim<=30){
+     setCategory("over weight");
+    }
+    if(bim>30 && bim<=35){
+     setCategory("Obess class 1")
+    }
+    if(bim>35 && bim<=40){
+     setCategory("Obess class 2")
+    }
+    if(bim>40){
+     setCategory("Obess class 3")
+    }
+   
+  }
+}, [formerror])
 const handleSubmit=(e)=>{
   e.preventDefault();
  setformError(validate(details));
- console.log(formerror);
- console.log(Object.keys(formerror))
- if(Object.keys(formerror).length===0){
-   let BIM=eval(details.weight/(details.height/100)**2);
-   setBmi(parseInt(BIM));
-   if(bim<16){
-    setCategory("severe thinness")
-   }
-   if(bim>=16 && bim<=17){
-    setCategory("Moderate Thinness")
-   }
-   if(bim>17 && bim<=18.5){
-    setCategory("Mild Thinness")
-   }
-   if(bim>18.5 && bim<=25){
-    setCategory("Normal")
-   }
-   if(bim>25 && bim<=30){
-    setCategory("over weight");
-   }
-   if(bim>30 && bim<=35){
-    setCategory("Obess class 1")
-   }
-   if(bim>35 && bim<=40){
-    setCategory("Obess class 2")
-   }
-   if(bim>40){
-    setCategory("Obess class 3")
-   }
-   setSubmit(true);
- }
- else{
-  setSubmit(false);
- }
+ setSubmit(true);
+//  console.log(formerror);
+//  console.log(Object.keys(formerror))
 }
 
 const validate=()=>{
@@ -97,7 +97,7 @@ return error;
         <div>{formerror.details}</div>
       </form>
       {
-        (submit)?  <p>{category}</p> : null
+    <p>{category}</p> 
       }
       
     </div>
