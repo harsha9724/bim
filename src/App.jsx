@@ -51,8 +51,11 @@ useEffect(() => {
 }, [formerror])
 const handleSubmit=(e)=>{
   e.preventDefault();
- setformError(validate(details));
- setSubmit(true);
+  if(submit){
+    setformError(validate(details));
+  }
+
+//  setSubmit(true);
 //  console.log(formerror);
 //  console.log(Object.keys(formerror))
 }
@@ -91,8 +94,16 @@ return error;
            <input type="text" name="weight" value={details.weight} onChange={handleChange}/><span>kg</span>
         </div>
         <div className='buttons'>
-          <button>Calculate</button>
-          <button>Clear</button>
+          <button onClick={()=>setSubmit(true)}>Calculate</button>
+          <button onClick={()=>{
+            setSubmit(false)
+            setdetails({
+              age:"",
+              gender:"",
+              height:"",
+              weight:""
+            })
+          }}>Clear</button>
         </div>
         <div>{formerror.details}</div>
       </form>
